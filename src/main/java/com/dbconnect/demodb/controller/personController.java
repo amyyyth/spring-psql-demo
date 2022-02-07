@@ -3,7 +3,9 @@ package com.dbconnect.demodb.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dbconnect.demodb.exception.EmailExistsException;
 import com.dbconnect.demodb.exception.ResourceNotFoundException;
 import com.dbconnect.demodb.model.person;
 import com.dbconnect.demodb.repository.personRepository;
+import com.dbconnect.demodb.service.personService;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -26,6 +30,9 @@ public class personController {
 	
 	@Autowired
 	private personRepository personRepository;
+	
+	@Autowired
+	private personService personService;
 	
 	// get person
 	@GetMapping("person")
@@ -45,9 +52,14 @@ public class personController {
 	
 	// save person
 	@PostMapping("person")
-	public person createPerson(@RequestBody person person) {
-		return this.personRepository.save(person);
-	}
+	public ResponseEntity<person> createPerson(@RequestBody person person) 
+			throws EmailExistsException {
+		
+		person personres = personRepository.save(person);
+//				.orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: "+personId));
+		
+		return ResponseEntity.ok().body(personres);
+}
 //	public person createPerson(@RequestBody person person) 
 //		throws Exception {
 //			this.personRepository.save(person)
