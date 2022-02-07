@@ -21,7 +21,7 @@ public class person {
 	@Column(name = "age")
 	private long age;
 	
-	@Column(name = "email")
+	@Column(name = "email",unique = true)
 	private String email;
 	
 	

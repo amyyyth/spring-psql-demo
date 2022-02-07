@@ -48,6 +48,13 @@ public class personController {
 	public person createPerson(@RequestBody person person) {
 		return this.personRepository.save(person);
 	}
+//	public person createPerson(@RequestBody person person) 
+//		throws Exception {
+//			this.personRepository.save(person)
+//					.orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: "+personId));
+//			return this.personRepository.save(person);
+//	}
+	
 	
 	
 	// update person
