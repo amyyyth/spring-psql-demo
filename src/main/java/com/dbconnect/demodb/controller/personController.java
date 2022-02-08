@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -52,20 +53,28 @@ public class personController {
 	
 	// save person
 	@PostMapping("person")
-	public ResponseEntity<person> createPerson(@RequestBody person person) 
-			throws EmailExistsException {
-		
-		person personres = personRepository.save(person);
-//				.orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: "+personId));
-		
-		return ResponseEntity.ok().body(personres);
-}
-//	public person createPerson(@RequestBody person person) 
-//		throws Exception {
-//			this.personRepository.save(person)
-//					.orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: "+personId));
-//			return this.personRepository.save(person);
-//	}
+	public ResponseEntity<?> createPerson(@RequestBody @Validated person person) {
+		try {
+			//person resp = personService.createPerson(person);
+			person resp = personService.createPerson(person);
+			return ResponseEntity.ok().body(resp);
+		} catch(Exception e) {
+			Throwable t = e.getCause();
+		    while ((t != null) && !(t instanceof ConstraintViolationException)) {
+		        t = t.getCause();
+		    }
+		    if (t instanceof ConstraintViolationException) {
+		    	return ResponseEntity.internalServerError()
+		    			.body(new EmailExistsException("Account already exists"));
+		    }
+		    else {
+		    	return ResponseEntity.internalServerError()
+		    			.body("Some weird error");
+		    }
+		    
+			
+		}
+	}
 	
 	
 	
