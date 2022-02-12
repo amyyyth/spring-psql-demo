@@ -66,9 +66,11 @@ public class personController {
 		    if (t instanceof ConstraintViolationException) {
 		    	return ResponseEntity.internalServerError()
 		    			.body(new EmailExistsException("Account already exists"));
-		    }
+			}
+
 		    else {
-		    	return ResponseEntity.internalServerError()
+				e.printStackTrace();
+				return ResponseEntity.internalServerError()
 		    			.body("Some weird error");
 		    }
 		    

@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: amith
+Build-Jdk: 1.8.0_321
+Implementation-Title: demodb
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.dbconnect
+Main-Class: ${start-class}
+

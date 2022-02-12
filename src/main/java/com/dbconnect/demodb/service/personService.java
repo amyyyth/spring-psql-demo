@@ -3,6 +3,7 @@ package com.dbconnect.demodb.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dbconnect.demodb.model.person;
@@ -11,6 +12,7 @@ import com.dbconnect.demodb.repository.personRepository;
 @Service
 public class personService implements personServiceInterface {
 
+	@Autowired
 	private personRepository personRepository;
 
 	@Override
