@@ -1,4 +1,4 @@
-package com.dbconnect.demodb.exception;
+package com.dbconnect.demodb.Exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

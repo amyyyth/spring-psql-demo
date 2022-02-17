@@ -1,10 +1,10 @@
-package com.dbconnect.demodb.model;
+package com.dbconnect.demodb.Model;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "person", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
-public class person {
+public class PersonModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,12 +20,12 @@ public class person {
     private String email;
 
 
-    public person() {
+    public PersonModel() {
         super();
     }
 
 
-    public person(String name, long age, String email) {
+    public PersonModel(String name, long age, String email) {
         super();
         this.name = name;
         this.age = age;
