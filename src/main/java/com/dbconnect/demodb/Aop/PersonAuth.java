@@ -43,7 +43,7 @@ public class PersonAuth {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode resJson = mapper.readTree(resBody);
         String isSuccess = resJson.get("success").toString();
-        if (isSuccess == "true"){
+        if ("true".equals(isSuccess)){
             System.out.println("auth success");
             curr_request.setAttribute("token",token);
             return pjp.proceed();
