@@ -1,11 +1,10 @@
-package com.dbconnect.demodb.Controller;
+package com.dbconnect.demodb.controller;
 
-import com.dbconnect.demodb.Payloads.AuthSignIn;
-import com.dbconnect.demodb.Exception.ResourceNotFoundException;
-import com.dbconnect.demodb.Model.PersonModel;
-import com.dbconnect.demodb.Payloads.TokenInvalid;
-import com.dbconnect.demodb.Payloads.successResponse;
-import com.dbconnect.demodb.Service.PersonService;
+import com.dbconnect.demodb.payloads.AuthSignIn;
+import com.dbconnect.demodb.exception.ResourceNotFoundException;
+import com.dbconnect.demodb.model.PersonModel;
+import com.dbconnect.demodb.payloads.TokenInvalid;
+import com.dbconnect.demodb.service.PersonService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -30,12 +28,13 @@ public class PersonController {
 	@Autowired
 	private PersonService personService;
 
-	private static com.dbconnect.demodb.Payloads.signInResponse signInResponse = new com.dbconnect.demodb.Payloads.signInResponse();
+	private static com.dbconnect.demodb.payloads.signInResponse signInResponse = new com.dbconnect.demodb.payloads.signInResponse();
 
 
 	// get person
 	@GetMapping("person")
 	public ResponseEntity<?> getPeopleAuth() throws IOException {
+
 		System.out.println("getpeople called");
 		HttpServletRequest curr_request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
 				.getRequest();

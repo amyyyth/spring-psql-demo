@@ -1,4 +1,4 @@
-package com.dbconnect.demodb.Payloads;
+package com.dbconnect.demodb.payloads;
 
 
 public class signInResponse {

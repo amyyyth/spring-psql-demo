@@ -1,19 +1,19 @@
-package com.dbconnect.demodb.Service;
+package com.dbconnect.demodb.service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.dbconnect.demodb.Payloads.AuthSignIn;
-import com.dbconnect.demodb.Exception.EmailExistsException;
-import com.dbconnect.demodb.Exception.ResourceNotFoundException;
+import com.dbconnect.demodb.payloads.AuthSignIn;
+import com.dbconnect.demodb.exception.EmailExistsException;
+import com.dbconnect.demodb.exception.ResourceNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 
-import com.dbconnect.demodb.Model.PersonModel;
-import com.dbconnect.demodb.Repository.PersonRepository;
+import com.dbconnect.demodb.model.PersonModel;
+import com.dbconnect.demodb.repository.PersonRepository;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 

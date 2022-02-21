@@ -1,4 +1,4 @@
-package com.dbconnect.demodb.Model;
+package com.dbconnect.demodb.model;
 
 import javax.persistence.*;
 

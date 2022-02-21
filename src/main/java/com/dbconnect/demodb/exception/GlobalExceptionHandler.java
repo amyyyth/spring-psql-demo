@@ -1,4 +1,4 @@
-package com.dbconnect.demodb.Exception;
+package com.dbconnect.demodb.exception;
 
 import java.util.Date;
 

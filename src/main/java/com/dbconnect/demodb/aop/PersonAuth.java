@@ -1,7 +1,7 @@
-package com.dbconnect.demodb.Aop;
+package com.dbconnect.demodb.aop;
 
 
-import com.dbconnect.demodb.Payloads.TokenInvalid;
+import com.dbconnect.demodb.payloads.TokenInvalid;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -56,7 +56,7 @@ public class PersonAuth {
     }
 
 
-    @Pointcut("execution(* com.dbconnect.demodb.Controller.PersonController.*Auth(..))")
+    @Pointcut("execution(* com.dbconnect.demodb.controller.PersonController.*Auth(..))")
     public void userSessionValidationFromURLTokenPointcut() {
         System.out.println("This method is VerifyToken.");
     }

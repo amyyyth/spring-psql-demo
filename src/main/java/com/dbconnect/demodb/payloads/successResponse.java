@@ -1,6 +1,6 @@
-package com.dbconnect.demodb.Payloads;
+package com.dbconnect.demodb.payloads;
 
-import com.dbconnect.demodb.Model.PersonModel;
+import com.dbconnect.demodb.model.PersonModel;
 
 import java.util.Date;
 import java.util.List;

@@ -11,6 +11,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@PropertySource(value = "file:C:\\Users\\amith\\Documents\\application.properties", ignoreResourceNotFound = true)
 @SpringBootApplication
 //@PropertySource(value = "file:C:/DPR/ums/application.properties", ignoreResourceNotFound = true)
 public class DemodbApplication extends SpringBootServletInitializer implements WebMvcConfigurer{
