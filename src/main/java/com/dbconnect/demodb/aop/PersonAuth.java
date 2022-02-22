@@ -8,6 +8,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -20,11 +21,13 @@ import java.util.Arrays;
 @Aspect
 @Component
 public class PersonAuth {
+
+    @Value("${backend.validate.uri}")
+    private String base_uri;
+
     @Around("userSessionValidationFromURLTokenPointcut()")
     public Object getAuth(ProceedingJoinPoint pjp) throws Throwable {
         RestTemplate restTemplate = new RestTemplate();
-        String base_uri = "https://ums.bytetale.com/umservices/api/auth/validate";
-//        String token = String.valueOf(personController.getAuthToken());
         HttpServletRequest curr_request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
                 .getRequest();
         String token = curr_request.getHeader("Authorization");
