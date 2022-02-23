@@ -9,12 +9,14 @@ import com.dbconnect.demodb.exception.EmailExistsException;
 import com.dbconnect.demodb.exception.ResourceNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 
 import com.dbconnect.demodb.model.PersonModel;
 import com.dbconnect.demodb.repository.PersonRepository;
 import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -22,6 +24,9 @@ public class PersonService implements PersonServiceInterface {
 
 	@Autowired
 	private PersonRepository personRepository;
+
+	@Value("${backend.signin.uri}")
+	private String base_uri;
 
 	@Override
 	public ResponseEntity<?> createPerson(PersonModel person) {
@@ -50,7 +55,6 @@ public class PersonService implements PersonServiceInterface {
 
 	@Override
 	public ResponseEntity<PersonModel> updatePerson(Long personId, PersonModel personDetails) throws ResourceNotFoundException {
-		// TODO Auto-generated method stub
 
 		PersonModel person = personRepository.findById(personId)
 				.orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: "+personId));
@@ -97,17 +101,18 @@ public class PersonService implements PersonServiceInterface {
 	@Override
 	public ResponseEntity<?> signinService(AuthSignIn authBody) throws HttpStatusCodeException {
 		RestTemplate restTemplate = new RestTemplate();
-		String base_uri = "https://ums.bytetale.com/umservices/api/auth/signin";
 		String token = "";
 		HttpHeaders headers = new HttpHeaders();
-//		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//		headers.set("Authorization", "Bearer "+token);
 		HttpEntity<AuthSignIn> request =
 				new HttpEntity<AuthSignIn>(authBody, headers);
-		ResponseEntity<?> res = restTemplate.exchange(
-				base_uri, HttpMethod.POST, request, String.class);
+		try {
+			return restTemplate.exchange(
+					base_uri, HttpMethod.POST, request, String.class);
+		}
+		catch (RestClientResponseException e){
+			return ResponseEntity.internalServerError().body("Some issue with the UMS server.");
+		}
 
-		return res;
 	}
 
 
